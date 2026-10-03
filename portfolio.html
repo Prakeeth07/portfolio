@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Portfolio | Shageeth Pratheep Varatharajan</title>
+  <meta name="description" content="Explore full-stack web and mobile applications engineered by Shageeth Pratheep Varatharajan.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <script>
+    try {
+      var t = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.dataset.theme = t;
+    } catch (e) {}
+  </script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <!-- Interactive Constellation Background Canvas -->
+  <canvas id="bg-canvas" class="bg-canvas" aria-hidden="true"></canvas>
+
+  <!-- Header & Navigation -->
+  <header class="site-header">
+    <div class="wrap bar">
+      <a class="brand" href="index.html" aria-label="Shageeth.dev Homepage">
+        Shageeth<span class="brand-dot">.</span><span class="brand-badge">Dev</span>
+      </a>
+
+      <nav id="nav" aria-label="Main Navigation">
+        <a href="index.html">Home</a>
+        <a href="portfolio.html" aria-current="page">Portfolio</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <div class="tools">
+        <button id="theme" class="icon-btn" aria-label="Switch theme" type="button">
+          <!-- Sun Icon (shown in dark mode) -->
+          <svg class="theme-icon-sun" viewBox="0 0 24 24" width="20" height="20">
+            <path d="M12 18C8.68629 18 6 15.3137 6 12C6 8.68629 8.68629 6 12 6C15.3137 6 18 8.68629 18 12C18 15.3137 15.3137 18 12 18ZM12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16ZM11 1H13V4H11V1ZM11 20H13V23H11V20ZM3.51472 4.92893L4.92893 3.51472L7.05025 5.63604L5.63604 7.05025L3.51472 4.92893ZM16.9497 18.364L18.364 16.9497L20.4853 19.0711L19.0711 20.4853L16.9497 18.364ZM19.0711 3.51472L20.4853 4.92893L18.364 7.05025L16.9497 5.63604L19.0711 3.51472ZM5.63604 16.9497L7.05025 18.364L4.92893 20.4853L3.51472 19.0711L5.63604 16.9497ZM23 11V13H20V11H23ZM4 11V13H1V11H4Z"/>
+          </svg>
+          <!-- Moon Icon (shown in light mode) -->
+          <svg class="theme-icon-moon" viewBox="0 0 24 24" width="20" height="20" style="display:none;">
+            <path d="M12.3 4.9C11.5 5.9 11 7.1 11 8.5C11 12.1 13.9 15 17.5 15C18.9 15 20.1 14.5 21.1 13.7C20.1 18.4 15.9 22 11 22C5.5 22 1 17.5 1 12C1 7.1 4.6 2.9 9.3 1.9C10.4 2.8 11.4 3.8 12.3 4.9Z"/>
+          </svg>
+        </button>
+        <button id="burger" class="icon-btn" aria-label="Open menu" aria-expanded="false" aria-controls="nav" type="button">
+          <svg viewBox="0 0 24 24" width="22" height="22">
+            <path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="wrap page-title">
+      <span class="section-tag">Curated Portfolio</span>
+      <h1>Featured Projects</h1>
+      <p class="lead">Full-stack web applications, mobile platforms, and enterprise solutions built with performance, security, and intuitive design in mind.</p>
+      
+      <!-- Dynamic Filter Buttons -->
+      <div id="filters" class="filters" role="group" aria-label="Filter projects by technology"></div>
+    </section>
+
+    <!-- Project Cards Grid -->
+    <section class="wrap" aria-label="Project list" style="padding-bottom: var(--s5);">
+      <div id="grid" class="grid" aria-live="polite">
+        <p class="muted">Loading projects…</p>
+      </div>
+    </section>
+
+    <!-- Project Details Modal -->
+    <div id="modal" class="modal" hidden>
+      <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="m-title" tabindex="-1">
+        <button id="m-close" class="close" aria-label="Close project details" type="button">✕</button>
+        <h2 id="m-title"></h2>
+        <p id="m-desc"></p>
+        <ul id="m-tags" class="chips"></ul>
+      </div>
+    </div>
+  </main>
+
+  <!-- Premium Footer -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-main">
+        <div class="footer-brand">
+          <h4>Shageeth<span class="text-royal">.dev</span></h4>
+          <p>Full-Stack Developer crafting high-performance web applications, scalable software systems, and modern digital technology solutions.</p>
+          <div class="footer-status">
+            <span class="status-pulse"></span>
+            <span>Open for full-time &amp; contracts</span>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h5>Navigation</h5>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Direct Contact</h5>
+          <ul class="footer-links">
+            <li><a href="mailto:shagith06@gmail.com">shagith06@gmail.com</a></li>
+            <li><a href="tel:+94763549069">+94 (76) 3549069</a></li>
+            <li><span class="muted">Batticaloa, Sri Lanka</span></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Connect</h5>
+          <p class="muted" style="font-size:0.85rem; margin-bottom: 0.5rem;">Explore repositories &amp; professional updates:</p>
+          <div class="footer-social-row">
+            <a href="https://github.com/" class="social-icon-btn" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+              </svg>
+            </a>
+            <a href="https://linkedin.com/" class="social-icon-btn" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
+              <svg viewBox="0 0 24 24">
+                <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9h2.77v8.37H6.46v-8.37M7.84 6.7a1.62 1.62 0 1 0 0 3.24 1.62 1.62 0 0 0 0-3.24z"/>
+              </svg>
+            </a>
+            <a href="mailto:shagith06@gmail.com" class="social-icon-btn" aria-label="Send Email">
+              <svg viewBox="0 0 24 24">
+                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+              </svg>
+            </a>
+            <a href="assets/Shageeth_CV.pdf" download="Shageeth_CV.pdf" class="social-icon-btn" aria-label="Download CV">
+              <svg viewBox="0 0 24 24">
+                <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© <span id="year">2026</span> Shageeth Pratheep Varatharajan. All rights reserved.</p>
+        <p>Royal Blue &amp; White Aesthetic • Full-Stack Engineering</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/portfolio.js"></script>
+  <script src="js/particles.js"></script>
+</body>
+</html>
